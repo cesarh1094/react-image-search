@@ -6,7 +6,7 @@ class SearchBar extends React.Component {
         search: ''
     }
 
-    onInputChange = event => (this.setState({ search: event.target.value.toUpperCase() }))
+    onInputChange = event => (this.setState({ search: event.target.value }))
 
     onFormSubmit = event => {
         event.preventDefault()
@@ -17,11 +17,13 @@ class SearchBar extends React.Component {
         return (
             <Aux>
                 <form onSubmit={this.onFormSubmit}>
-                    <label>Image Search</label>
-                    <input
-                        type="text"
-                        value={this.state.search}
-                        onChange={this.onInputChange} />
+                    <div className="search">
+                        <input
+                            type="text"
+                            value={this.state.search}
+                            onChange={this.onInputChange}
+                            placeholder="Search images" />
+                    </div>
                 </form>
             </Aux>
         )
