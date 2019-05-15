@@ -1,0 +1,7 @@
+{
+    "url": "https://api.unsplash.com/",
+    "accessKey": "7436e7650597b3dea1fefca04c6d3126d3240b12ff4fc1be6885b997079324cb",
+    "headers": {
+        "Authorization": "Client-ID 7436e7650597b3dea1fefca04c6d3126d3240b12ff4fc1be6885b997079324cb"
+    }
+}
