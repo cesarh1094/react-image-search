@@ -5,6 +5,7 @@ import Aux from './components/Aux'
 import SearchBar from './components/SearchBar'
 import ImageList from './components/ImageList';
 import './App.css'
+import { ReactComponent as Logo } from './logo.svg'
 
 class App extends React.Component {
   state = { images: [] }
@@ -30,6 +31,14 @@ class App extends React.Component {
       <Aux>
         <SearchBar onSubmit={this.onSearchSubmit} />
         <ImageList images={this.state.images} />
+        <div className="wrapper">
+          <footer>
+            <p>Powered By:</p>
+            <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
+              <Logo className="logo" alt="React"/>
+            </a>
+          </footer>
+        </div>
       </Aux>
     );
   }

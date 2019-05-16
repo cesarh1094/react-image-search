@@ -94,6 +94,31 @@
   font-size: 100%;
 }
 
+footer {
+  margin-top: 60px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  max-width: 125px;
+  animation: spin 11s infinite linear;
+}
+
+.logo g {
+  fill: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 @media only screen and (max-width: 992px) {
   .images {
     column-count: 2;
