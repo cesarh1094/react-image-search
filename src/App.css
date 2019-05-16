@@ -9,6 +9,8 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .images {
@@ -18,7 +20,8 @@
 }
 
 .image {
-  display: inline-block;
+  display: block;
+  width: 100%;
   position: relative;
   vertical-align: top;
   margin-bottom: 10px;
@@ -26,12 +29,13 @@
 
 .image img {
   display: block;
+  width: 100%;
   max-width: 100%;
   margin: 0;
   backface-visibility: hidden;
 }
 
-.image::before {
+.image-download::before {
   content: "";
   display: block;
   position: absolute;
@@ -40,9 +44,10 @@
   width: 100%;
   height: 100%;
   opacity: 0;
+  background: linear-gradient(to bottom right, transparent 65%, black);
 }
 
-.image::after {
+.image-download::after {
   content: "Click to Download";
   display: block;
   position: absolute;
@@ -55,10 +60,28 @@
   opacity: 0;
 }
 
+.image-download::before,
+.image-download::after {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.image-download:hover {
+  cursor: pointer;
+}
+
+.image-download {
+  display: block;
+}
+
+.image-download:hover::before,
+.image-download:hover::after {
+  opacity: 1;
+}
+
 .search {
-  margin: 10px 0;
-  border: 1px solid lightgray;
-  font-size: 15px;
+  margin: 10px 0 20px;
+  border-bottom: 1px solid lightgray;
+  font-size: 18px;
 }
 
 .search input {
@@ -74,6 +97,11 @@
 @media only screen and (max-width: 992px) {
   .images {
     column-count: 2;
+  }
+
+  .image-download::before,
+  .image-download::after {
+    opacity: 1;
   }
 }
 

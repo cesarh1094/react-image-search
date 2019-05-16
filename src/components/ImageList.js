@@ -2,16 +2,13 @@ import React from 'react'
 import Aux from './Aux'
 import ImageCard from './ImageCard'
 
-const ImageList = (props) => {
-    const images = props.images.map(({ id, alt_description, urls }) => {
-        return <ImageCard image={{ alt_description, urls }} key={id} />
+const ImageList = props => {
+
+    const images = props.images.map(({ id, alt_description, urls, links: { download } }) => {
+        return <ImageCard image={{ alt_description, urls, id, download }} key={id} />
     })
 
-    return (<Aux className="images">{images}</Aux>)
-}
-
-ImageList.defaultProps = {
-    images: []
+    return (<Aux className="images" >{images}</Aux>)
 }
 
 export default ImageList

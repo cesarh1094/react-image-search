@@ -15,7 +15,7 @@ class SearchBar extends React.Component {
 
     render() {
         return (
-            <Aux>
+            <Aux className="search-wrapper">
                 <form onSubmit={this.onFormSubmit}>
                     <div className="search">
                         <input

@@ -1,32 +1,20 @@
 import React from 'react'
 
-class ImageCard extends React.Component {
-    constructor(props) {
-        super(props)
+const ImageCard = props => {
 
-        this.state = {
-            url: '',
-            alt: '',
-        }
-        this.ref = React.createRef()
-    }
+    const { alt_description, urls, id, download } = props.image
 
-    componentDidMount() {
-        const { urls, alt_description } = this.props.image
+    return (
+        <div className="image" data-id={id}>
+            <a href={download} target="_blank"  rel="noopener noreferrer" className="image-download">
+                <img src={urls.regular} alt={alt_description} />
+            </a>
+        </div>
+    )
+}
 
-        this.setState({
-            url: urls.regular,
-            alt: alt_description,
-        })
-    }
-
-    render() {
-        return (
-            <div className="image">
-                <img ref={this.ref} src={this.state.url} alt={this.state.alt} />
-            </div>
-        )
-    }
+ImageCard.defaultProps = {
+    image: {}
 }
 
 export default ImageCard
