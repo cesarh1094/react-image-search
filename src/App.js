@@ -1,47 +1,51 @@
-import React from 'react'
-import unsplash from './api/unsplash'
-import _ from 'lodash'
-import Aux from './components/Aux'
-import SearchBar from './components/SearchBar'
+import React from 'react';
+
+// API
+import unsplash from './api/unsplash';
+
+// Components
+import Aux from './components/Aux';
+import SearchBar from './components/SearchBar';
 import ImageList from './components/ImageList';
-import './App.css'
-import { ReactComponent as Logo } from './logo.svg'
 
-class App extends React.Component {
-  state = { images: [] }
+// Custom Hooks
+import { useSearchPhotos } from './services/hooks';
 
-  componentDidMount() {
-    unsplash.get(`/search/photos`, {
-      params: { query: 'cars' },
-    })
-      .then(response => (this.setState({ images: _.get(response, ['data', 'results'], []) })))
-      .catch((error) => { })
-  }
+// Utilities
+import { get } from 'lodash';
 
-  onSearchSubmit = async (search) => {
+// Styles
+import './App.css';
+
+// Logo
+import { ReactComponent as Logo } from './logo.svg';
+
+const App = () => {
+  const [images, setImages] = useSearchPhotos();
+
+  const onSearchSubmit = async search => {
     const response = await unsplash.get(`/search/photos`, {
       params: { query: search },
-    })
+    });
 
-    this.setState({ images: _.get(response, ['data', 'results'], []) })
-  }
+    const images = get(response, ['data', 'results'], []);
+    setImages(images);
+  };
 
-  render() {
-    return (
-      <Aux>
-        <SearchBar onSubmit={this.onSearchSubmit} />
-        <ImageList images={this.state.images} />
-        <div className="wrapper">
-          <footer>
-            <p>Powered By:</p>
-            <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
-              <Logo className="logo" alt="React"/>
-            </a>
-          </footer>
-        </div>
-      </Aux>
-    );
-  }
-}
+  return (
+    <Aux>
+      <SearchBar onSubmit={onSearchSubmit} />
+      <ImageList images={images} />
+      <div className="wrapper">
+        <footer>
+          <p>Powered By:</p>
+          <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
+            <Logo className="logo" alt="React" />
+          </a>
+        </footer>
+      </div>
+    </Aux>
+  );
+};
 
 export default App;

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const Aux = props => {
-    return (<div className={props.className}>{props.children}</div>)
-}
+const Aux = ({ children, className }) => {
+  return <div className={className}>{children}</div>;
+};
 
 Aux.defaultProps = {
-    className: 'wrapper'
-}
+  className: 'wrapper',
+};
 
-export default Aux
+export default Aux;

@@ -1,33 +1,26 @@
-import React from 'react'
-import Aux from './Aux'
+import React, { useState } from 'react';
+import Aux from './Aux';
 
-class SearchBar extends React.Component {
-    state = {
-        search: ''
-    }
+const SearchBar = props => {
+  const [search, setSearch] = useState('');
+  const { onSubmit } = props;
 
-    onInputChange = event => (this.setState({ search: event.target.value }))
+  const onInputChange = event => setSearch(event.target.value);
 
-    onFormSubmit = event => {
-        event.preventDefault()
-        this.props.onSubmit(this.state.search)
-    }
+  const onFormSubmit = event => {
+    event.preventDefault();
+    onSubmit(search);
+  };
 
-    render() {
-        return (
-            <Aux className="search-wrapper">
-                <form onSubmit={this.onFormSubmit}>
-                    <div className="search">
-                        <input
-                            type="text"
-                            value={this.state.search}
-                            onChange={this.onInputChange}
-                            placeholder="Search images" />
-                    </div>
-                </form>
-            </Aux>
-        )
-    }
-}
+  return (
+    <Aux className="search-wrapper">
+      <form onSubmit={onFormSubmit}>
+        <div className="search">
+          <input type="text" value={search} onChange={onInputChange} placeholder="Search images" />
+        </div>
+      </form>
+    </Aux>
+  );
+};
 
-export default SearchBar
+export default SearchBar;
