@@ -1,34 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 
 // API
 import unsplash from '../api/unsplash';
+
+// Reducers
+import imagesReducer, { defaultState, fetching, success, error } from '../reducers/imagesReducer';
 
 // Utilities
 import { get } from 'lodash';
 import { handle } from '../utils';
 
-export const useSearchPhotos = () => {
-  const [images, setImages] = useState([]);
+export const useSearchPhotosReducer = keyword => {
+  const [state, dispatch] = useReducer(imagesReducer, defaultState);
 
   useEffect(() => {
     const retrieveImages = async () => {
-      const [response, error] = await handle(
+      dispatch(fetching());
+
+      const [response, errorResponse] = await handle(
         unsplash.get(`/search/photos`, {
-          params: { query: 'cars' },
+          params: { query: keyword },
         })
       );
 
-      if (error) {
-        console.error(error);
+      if (errorResponse) {
+        dispatch(error(errorResponse));
         return;
       }
 
       const images = get(response, ['data', 'results'], []);
-      setImages(images);
+      dispatch(success(images));
     };
 
     retrieveImages();
-  }, []);
+  }, [keyword]);
 
-  return [images, setImages];
+  return [state];
 };
