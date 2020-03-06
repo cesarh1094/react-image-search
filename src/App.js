@@ -1,7 +1,4 @@
-import React from 'react';
-
-// API
-import unsplash from './api/unsplash';
+import React, { useState } from 'react';
 
 // Components
 import Aux from './components/Aux';
@@ -9,10 +6,7 @@ import SearchBar from './components/SearchBar';
 import ImageList from './components/ImageList';
 
 // Custom Hooks
-import { useSearchPhotos } from './services/hooks';
-
-// Utilities
-import { get } from 'lodash';
+import { useSearchPhotosReducer } from './services/hooks';
 
 // Styles
 import './App.css';
@@ -21,16 +15,11 @@ import './App.css';
 import { ReactComponent as Logo } from './logo.svg';
 
 const App = () => {
-  const [images, setImages] = useSearchPhotos();
+  const [search, setSearch] = useState('cars');
+  const [state] = useSearchPhotosReducer(search);
+  const { images, status } = state;
 
-  const onSearchSubmit = async search => {
-    const response = await unsplash.get(`/search/photos`, {
-      params: { query: search },
-    });
-
-    const images = get(response, ['data', 'results'], []);
-    setImages(images);
-  };
+  const onSearchSubmit = search => setSearch(search);
 
   return (
     <Aux>
