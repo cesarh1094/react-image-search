@@ -4,7 +4,7 @@ const ERROR = 'images/ERROR';
 
 export const fetching = () => ({ type: FETCHING });
 export const success = response => ({ type: SUCCESS, payload: response });
-export const error = error => ({ type: ERROR, payload: error });
+export const error = response => ({ type: ERROR, payload: response });
 
 export const defaultState = {
   status: null,
