@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Aux from './Aux';
+import Aux from './aux';
 
 const SearchBar = props => {
   const [search, setSearch] = useState('');

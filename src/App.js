@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 // Components
-import Aux from './components/Aux';
-import SearchBar from './components/SearchBar';
-import ImageList from './components/ImageList';
+import Aux from './components/aux';
+import SearchBar from './components/search-bar';
+import ImageList from './components/image-list';
 
 // Custom Hooks
-import { useSearchPhotosReducer } from './services/hooks';
+import { useSearchPhotosReducer } from './hooks/search-photos';
 
 // Styles
 import './App.css';
