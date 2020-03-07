@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Components
-import Aux from './Aux';
-import ImageCard from './ImageCard';
+import Aux from './aux';
+import ImageCard from './image-card';
 
 const ImageList = props => {
   const { images } = props;

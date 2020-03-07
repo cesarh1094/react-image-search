@@ -4,7 +4,7 @@ import { useEffect, useReducer } from 'react';
 import unsplash from '../api/unsplash';
 
 // Reducers
-import imagesReducer, { defaultState, fetching, success, error } from '../reducers/imagesReducer';
+import imagesReducer, { defaultState, fetching, success, error } from '../reducers/images';
 
 // Utilities
 import { get } from 'lodash';
