@@ -7,7 +7,7 @@ const ImageCard = props => {
   return (
     <div className="image" data-id={id}>
       <a href={download} target="_blank" rel="noopener noreferrer" className="image-download">
-        <img src={urls.regular} alt={alt_description} />
+        <img src={urls.regular} alt={alt_description} loading="lazy"/>
       </a>
     </div>
   );
