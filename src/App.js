@@ -13,17 +13,32 @@ import './App.css';
 
 // Logo
 import { ReactComponent as Logo } from './logo.svg';
+import Status from './components/status';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
   const [state] = useSearchPhotosReducer(search);
   const { images, status } = state;
-
   const onSearchSubmit = search => setSearch(search);
 
   return (
     <Aux>
       <SearchBar onSubmit={onSearchSubmit} />
+      <Status {...{ status }}>
+        {({ status }) => {
+          if (!status) {
+            return null;
+          }
+
+          const search = status.toLowerCase().search('fetching');
+
+          if (-1 === search) {
+            return null;
+          }
+
+          return <p>Loading</p>;
+        }}
+      </Status>
       <ImageList images={images} />
       <div className="wrapper">
         <footer>
