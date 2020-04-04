@@ -3,16 +3,29 @@ const SUCCESS = 'images/SUCCESS';
 const ERROR = 'images/ERROR';
 
 export const fetching = () => ({ type: FETCHING });
-export const success = response => ({ type: SUCCESS, payload: response });
-export const error = response => ({ type: ERROR, payload: response });
+export const success = (response: any) => ({ type: SUCCESS, payload: response });
+export const error = (response: any) => ({ type: ERROR, payload: response });
 
-export const defaultState = {
+interface ImagesState {
+  status: null | any;
+  error: null | any;
+  images: [];
+}
+
+interface ImagesAction {
+  type: string;
+  payload?: any;
+}
+
+export const defaultState: ImagesState = {
   status: null,
   error: null,
   images: [],
 };
 
-const imagesReducer = (state = defaultState, { type, payload }) => {
+const imagesReducer = (state = defaultState, action: ImagesAction) => {
+  const { type, payload } = action;
+
   switch (type) {
     case FETCHING: {
       return { ...defaultState, status: type };

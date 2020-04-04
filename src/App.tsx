@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 // Components
 import Aux from './components/aux';
-import SearchBar from './components/search-bar';
+import SearchBar from './components/SearchBar';
 import ImageList from './components/image-list';
+import Status from './components/Status';
 
 // Custom Hooks
 import { useSearchPhotosReducer } from './hooks/search-photos';
@@ -13,13 +14,12 @@ import './App.css';
 
 // Logo
 import { ReactComponent as Logo } from './logo.svg';
-import Status from './components/status';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
   const [state] = useSearchPhotosReducer(search);
   const { images, status } = state;
-  const onSearchSubmit = search => setSearch(search);
+  const onSearchSubmit = (search: string) => setSearch(search);
 
   return (
     <Aux>
@@ -44,7 +44,7 @@ const App = () => {
         <footer>
           <p>Powered By:</p>
           <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
-            <Logo className="logo" alt="React" />
+            <Logo className="logo" />
           </a>
         </footer>
       </div>

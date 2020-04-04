@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, FC, FormEvent, ChangeEvent } from 'react';
 import Aux from './aux';
 
-const SearchBar = props => {
+interface SearchBarProps {
+  onSubmit(search: string): void;
+}
+
+const SearchBar: FC<SearchBarProps> = props => {
   const [search, setSearch] = useState('');
   const { onSubmit } = props;
 
-  const onInputChange = event => setSearch(event.target.value);
+  const onInputChange = (event: ChangeEvent) => setSearch((event.target as HTMLInputElement).value);
 
-  const onFormSubmit = event => {
+  const onFormSubmit = (event: FormEvent) => {
     event.preventDefault();
     onSubmit(search);
   };
