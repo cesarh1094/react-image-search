@@ -1,5 +1,8 @@
 import { useEffect, Dispatch } from 'react';
 
+// Types
+import { ImagesState } from '../types/images';
+
 // API
 import unsplash from '../api/unsplash';
 
@@ -19,7 +22,7 @@ import { get } from 'lodash';
 import { handle } from '../utils';
 import { Action } from '../types/reducer';
 
-export const useSearchPhotos = (keyword: string) => {
+export const useSearchPhotos = (keyword: string): ImagesState => {
   const [state, dispatch] = useThunkReducer(imagesReducer, defaultState);
 
   useEffect(() => {
@@ -42,5 +45,5 @@ export const useSearchPhotos = (keyword: string) => {
     });
   }, [keyword, dispatch]);
 
-  return [state];
+  return state;
 };

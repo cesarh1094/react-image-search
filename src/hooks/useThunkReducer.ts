@@ -1,7 +1,7 @@
 import { useReducer, useCallback, Reducer, ReducerState } from 'react';
 
 // Types
-import { ThunkDispatch, ThunkAction, Action } from '../types/reducer';
+import { Action, ThunkDispatch, ThunkAction } from '../types/reducer';
 
 const useThunkReducer = (
   reducer: Reducer<any, Action>,

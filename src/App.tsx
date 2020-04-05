@@ -17,9 +17,12 @@ import { ReactComponent as Logo } from './logo.svg';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
-  const [state] = useSearchPhotos(search);
-  const { images, status } = state;
-  const onSearchSubmit = (search: string) => setSearch(search);
+  const imagesState = useSearchPhotos(search);
+  const { images, status } = imagesState;
+
+  const onSearchSubmit = (search: string) => {
+    setSearch(search);
+  };
 
   return (
     <Aux>
@@ -43,7 +46,10 @@ const App = () => {
       <div className="wrapper">
         <footer>
           <p>Powered By:</p>
-          <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://reactjs.org/"
+            target="_blank"
+            rel="noopener noreferrer">
             <Logo className="logo" />
           </a>
         </footer>

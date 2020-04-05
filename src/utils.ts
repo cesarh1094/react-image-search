@@ -19,6 +19,10 @@
  * @returns {Promise} [ data, undefined ]
  * @returns {Promise} [ undefined, Error ]
  */
-export const handle = (promise: Promise<void>) => {
-  return promise.then((data) => [data, undefined]).catch((error) => Promise.resolve([undefined, error]));
+export const handle = (
+  promise: Promise<any>
+): Promise<any[] | [undefined, any]> => {
+  return promise
+    .then((data: any) => [data])
+    .catch((error: any) => Promise.resolve([undefined, error]));
 };

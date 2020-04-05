@@ -1,21 +1,16 @@
+// Types
+import { ImagesState, ImagesAction } from '../types/images';
+
 const FETCHING = 'images/FETCHING';
 const SUCCESS = 'images/SUCCESS';
 const ERROR = 'images/ERROR';
 
 export const fetching = () => ({ type: FETCHING });
-export const success = (response: any) => ({ type: SUCCESS, payload: response });
+export const success = (response: any) => ({
+  type: SUCCESS,
+  payload: response,
+});
 export const error = (response: any) => ({ type: ERROR, payload: response });
-
-interface ImagesState {
-  status: null | any;
-  error: null | any;
-  images: [];
-}
-
-interface ImagesAction {
-  type: string;
-  payload?: any;
-}
 
 export const defaultState: ImagesState = {
   status: null,
