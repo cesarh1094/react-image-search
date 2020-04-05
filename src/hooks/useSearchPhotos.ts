@@ -1,20 +1,29 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, Dispatch } from 'react';
 
 // API
 import unsplash from '../api/unsplash';
 
+// Custom Hook
+import useThunkReducer from './useThunkReducer';
+
 // Reducers
-import imagesReducer, { defaultState, fetching, success, error } from '../reducers/images';
+import imagesReducer, {
+  defaultState,
+  fetching,
+  success,
+  error,
+} from '../reducers/images';
 
 // Utilities
 import { get } from 'lodash';
 import { handle } from '../utils';
+import { Action } from '../types/reducer';
 
 export const useSearchPhotos = (keyword: string) => {
-  const [state, dispatch] = useReducer(imagesReducer, defaultState);
+  const [state, dispatch] = useThunkReducer(imagesReducer, defaultState);
 
   useEffect(() => {
-    const retrieveImages = async () => {
+    dispatch(async (dispatch: Dispatch<Action>) => {
       dispatch(fetching());
 
       const [response, errorResponse] = await handle(
@@ -30,10 +39,8 @@ export const useSearchPhotos = (keyword: string) => {
 
       const images = get(response, ['data', 'results'], []);
       dispatch(success(images));
-    };
-
-    retrieveImages();
-  }, [keyword]);
+    });
+  }, [keyword, dispatch]);
 
   return [state];
 };
