@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 // Components
-import Aux from './components/aux';
+import Aux from './components/Aux';
 import SearchBar from './components/SearchBar';
-import ImageList from './components/image-list';
+import ImageList from './components/ImageList';
 import Status from './components/Status';
 
 // Custom Hooks
-import { useSearchPhotosReducer } from './hooks/search-photos';
+import { useSearchPhotos } from './hooks/useSearchPhotos';
 
 // Styles
 import './App.css';
@@ -17,7 +17,7 @@ import { ReactComponent as Logo } from './logo.svg';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
-  const [state] = useSearchPhotosReducer(search);
+  const [state] = useSearchPhotos(search);
   const { images, status } = state;
   const onSearchSubmit = (search: string) => setSearch(search);
 

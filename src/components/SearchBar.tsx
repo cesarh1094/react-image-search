@@ -1,5 +1,5 @@
 import React, { useState, FC, FormEvent, ChangeEvent } from 'react';
-import Aux from './aux';
+import Aux from './Aux';
 
 interface SearchBarProps {
   onSubmit(search: string): void;

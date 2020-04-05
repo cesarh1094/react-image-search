@@ -10,7 +10,7 @@ import imagesReducer, { defaultState, fetching, success, error } from '../reduce
 import { get } from 'lodash';
 import { handle } from '../utils';
 
-export const useSearchPhotosReducer = (keyword: string) => {
+export const useSearchPhotos = (keyword: string) => {
   const [state, dispatch] = useReducer(imagesReducer, defaultState);
 
   useEffect(() => {
