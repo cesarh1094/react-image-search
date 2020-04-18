@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import Aux from './components/Aux';
 import SearchBar from './components/SearchBar/SearchBar';
 import ImageList from './components/ImageList';
+import PageControls from './components/PageControls/PageControls';
+import { ThemeContextProvider } from './context/ThemeContext/ThemeContext';
+import ToggleTheme from './components/ToggleTheme';
 import Status from './components/Status';
 
 // Custom Hooks
@@ -17,9 +20,6 @@ import './App.css';
 
 // Logo
 import { ReactComponent as Logo } from './logo.svg';
-import PageControls from './components/PageControls/PageControls';
-import { ThemeContextProvider } from './context/ThemeContext/ThemeContext';
-import ToggleTheme from './components/ToggleTheme';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
