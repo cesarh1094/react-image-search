@@ -1,15 +1,17 @@
 import React, { useState, FC, FormEvent, ChangeEvent } from 'react';
-import Aux from './Aux';
+import Aux from '../Aux';
+import styles from './searchBar.module.scss';
 
 interface SearchBarProps {
   onSubmit(search: string): void;
 }
 
-const SearchBar: FC<SearchBarProps> = props => {
+const SearchBar: FC<SearchBarProps> = (props) => {
   const [search, setSearch] = useState('');
   const { onSubmit } = props;
 
-  const onInputChange = (event: ChangeEvent) => setSearch((event.target as HTMLInputElement).value);
+  const onInputChange = (event: ChangeEvent) =>
+    setSearch((event.target as HTMLInputElement).value);
 
   const onFormSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -19,8 +21,13 @@ const SearchBar: FC<SearchBarProps> = props => {
   return (
     <Aux className="search-wrapper">
       <form onSubmit={onFormSubmit}>
-        <div className="search">
-          <input type="text" value={search} onChange={onInputChange} placeholder="Search images" />
+        <div className={styles.search}>
+          <input
+            type="text"
+            value={search}
+            onChange={onInputChange}
+            placeholder="Search images"
+          />
         </div>
       </form>
     </Aux>

@@ -1,0 +1,63 @@
+$white: #fff;
+$black: #000;
+
+.button-light {
+  &:not(:disabled) {
+    border-color: $black;
+    background: transparent;
+    color: $black;
+
+    &:hover {
+      border-color: $black;
+      background: $black;
+      color: $white;
+    }
+  }
+}
+
+.button-dark {
+  &:not(:disabled) {
+    border-color: $white;
+    background: transparent;
+    color: $white;
+
+    &:hover {
+      border-color: $white;
+      background: $white;
+      color: $black;
+    }
+  }
+}
+
+.controls {
+  margin: 20px 0;
+}
+
+.control {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+  background: transparent;
+  border: 1px solid;
+  color: inherit;
+  appearance: none;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+  }
+}

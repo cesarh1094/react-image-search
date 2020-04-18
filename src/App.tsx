@@ -2,59 +2,80 @@ import React, { useState } from 'react';
 
 // Components
 import Aux from './components/Aux';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar/SearchBar';
 import ImageList from './components/ImageList';
 import Status from './components/Status';
 
 // Custom Hooks
 import { useSearchPhotos } from './hooks/useSearchPhotos';
 
+// Utilities
+import { isEmpty } from 'lodash';
+
 // Styles
 import './App.css';
 
 // Logo
 import { ReactComponent as Logo } from './logo.svg';
+import PageControls from './components/PageControls/PageControls';
+import { ThemeContextProvider } from './context/ThemeContext/ThemeContext';
+import ToggleTheme from './components/ToggleTheme';
 
 const App = () => {
   const [search, setSearch] = useState('cars');
-  const imagesState = useSearchPhotos(search);
-  const { images, status } = imagesState;
+  const [page, setPage] = useState(1);
+  const imagesState = useSearchPhotos(search, page);
+  const { images, status, maxPages } = imagesState;
 
   const onSearchSubmit = (search: string) => {
-    setSearch(search);
+    setSearch(isEmpty(search) ? 'cars' : search);
+    setPage(1);
   };
 
   return (
-    <Aux>
-      <SearchBar onSubmit={onSearchSubmit} />
-      <Status {...{ status }}>
-        {({ status }) => {
-          if (!status) {
-            return null;
-          }
+    <ThemeContextProvider>
+      <Aux>
+        <ToggleTheme />
+        <SearchBar onSubmit={onSearchSubmit} />
+        <PageControls
+          currentPage={page}
+          maxPage={maxPages}
+          setCurrentPage={setPage}
+        />
+        <Status {...{ status }}>
+          {({ status }) => {
+            if (!status) {
+              return null;
+            }
 
-          const search = status.toLowerCase().search('fetching');
+            const search = status.toLowerCase().search('loading');
 
-          if (-1 === search) {
-            return null;
-          }
+            if (-1 === search) {
+              return null;
+            }
 
-          return <p>Loading</p>;
-        }}
-      </Status>
-      <ImageList images={images} />
-      <div className="wrapper">
-        <footer>
-          <p>Powered By:</p>
-          <a
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer">
-            <Logo className="logo" />
-          </a>
-        </footer>
-      </div>
-    </Aux>
+            return <p>Loading</p>;
+          }}
+        </Status>
+        <ImageList images={images} />
+        <PageControls
+          currentPage={page}
+          maxPage={maxPages}
+          setCurrentPage={setPage}
+        />
+        <div className="wrapper">
+          <footer>
+            <p>Powered By:</p>
+            <a
+              href="https://reactjs.org/"
+              target="_blank"
+              rel="noopener noreferrer">
+              <Logo className="logo" />
+            </a>
+          </footer>
+        </div>
+      </Aux>
+    </ThemeContextProvider>
   );
 };
 

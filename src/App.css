@@ -79,7 +79,7 @@
 }
 
 .search {
-  margin: 10px 0 20px;
+  margin: 0 0 20px;
   border-bottom: 1px solid lightgray;
   font-size: 18px;
 }
@@ -97,16 +97,11 @@
 footer {
   margin-top: 60px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.25);
 }
 
 .logo {
   max-width: 125px;
   animation: spin 11s infinite linear;
-}
-
-.logo g {
-  fill: rgba(0, 0, 0, 0.2);
 }
 
 @keyframes spin {

@@ -16,14 +16,15 @@ export const defaultState: ImagesState = {
   status: null,
   error: null,
   images: [],
+  maxPages: 1,
 };
 
 const imagesReducer = (state = defaultState, action: ImagesAction) => {
-  const { type, payload } = action;
+  const { type, payload = [] } = action;
 
   switch (type) {
     case FETCHING: {
-      return { ...defaultState, status: type };
+      return { ...state, status: type };
     }
     case SUCCESS: {
       return { ...state, status: type, images: payload };

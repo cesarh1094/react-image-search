@@ -2,11 +2,12 @@ export interface ImagesState {
   status: null | any;
   error: null | any;
   images: [];
+  maxPages: number;
 }
 
 export interface ImagesAction {
   type: string;
-  payload?: any;
+  payload?: [];
 }
 
 export interface Image {

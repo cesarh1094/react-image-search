@@ -1,0 +1,16 @@
+.theme {
+  &-light,
+  &-dark {
+    padding: 10px;
+  }
+
+  &-dark {
+    background: black;
+    color: white;
+  }
+
+  &-light {
+    background: white;
+    color: black;
+  }
+}

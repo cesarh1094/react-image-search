@@ -1,4 +1,4 @@
-import { useEffect, Dispatch } from 'react';
+import { usePaginatedQuery } from 'react-query';
 
 // Types
 import { ImagesState } from '../types/images';
@@ -6,44 +6,25 @@ import { ImagesState } from '../types/images';
 // API
 import unsplash from '../api/unsplash';
 
-// Custom Hook
-import useThunkReducer from './useThunkReducer';
-
-// Reducers
-import imagesReducer, {
-  defaultState,
-  fetching,
-  success,
-  error,
-} from '../reducers/images';
-
 // Utilities
 import { get } from 'lodash';
-import { handle } from '../utils';
-import { Action } from '../types/reducer';
 
-export const useSearchPhotos = (keyword: string): ImagesState => {
-  const [state, dispatch] = useThunkReducer(imagesReducer, defaultState);
+export const useSearchPhotos = (keyword: string, page = 0): ImagesState => {
+  const {
+    status: paginationStatus,
+    resolvedData,
+    error: paginationError,
+  } = usePaginatedQuery(['imagesPaginated', keyword, page], fetchImage);
+  const maxPages = get(resolvedData, 'total_pages', 0);
+  const images = get(resolvedData, 'results', []);
 
-  useEffect(() => {
-    dispatch(async (dispatch: Dispatch<Action>) => {
-      dispatch(fetching());
+  return { status: paginationStatus, error: paginationError, images, maxPages };
+};
 
-      const [response, errorResponse] = await handle(
-        unsplash.get(`/search/photos`, {
-          params: { query: keyword },
-        })
-      );
+const fetchImage = async (key: string, keyword: string, page = 0) => {
+  const { data } = await unsplash.get(`/search/photos`, {
+    params: { query: keyword, page },
+  });
 
-      if (errorResponse) {
-        dispatch(error(errorResponse));
-        return;
-      }
-
-      const images = get(response, ['data', 'results'], []);
-      dispatch(success(images));
-    });
-  }, [keyword, dispatch]);
-
-  return state;
+  return data;
 };
