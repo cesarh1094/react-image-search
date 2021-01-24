@@ -1,14 +1,33 @@
+export enum ImageActionTypes {
+  Fetching = 'images/FETCHING',
+  Success = 'images/SUCCESS',
+  Error = 'images/ERROR',
+}
 export interface ImagesState {
-  status: null | any;
+  status: null | string;
   error: null | any;
   images: [];
   maxPages: number;
 }
 
-export interface ImagesAction {
-  type: string;
-  payload?: [];
+export interface ImagesFetchingAction {
+  type: ImageActionTypes.Fetching;
 }
+
+export interface ImagesSuccessAction {
+  type: ImageActionTypes.Success;
+  payload: Image[];
+}
+
+export interface ImagesErrorAction {
+  type: ImageActionTypes.Error;
+  error: any;
+}
+
+export type ImagesAction =
+  | ImagesFetchingAction
+  | ImagesSuccessAction
+  | ImagesErrorAction;
 
 export interface Image {
   id: string | number;

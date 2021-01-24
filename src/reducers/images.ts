@@ -1,16 +1,26 @@
 // Types
-import { ImagesState, ImagesAction } from '../types/images';
+import {
+  ImagesState,
+  ImagesAction,
+  ImagesErrorAction,
+  ImagesSuccessAction,
+  ImagesFetchingAction,
+  ImageActionTypes,
+} from '../types/images';
 
-const FETCHING = 'images/FETCHING';
-const SUCCESS = 'images/SUCCESS';
-const ERROR = 'images/ERROR';
+export const fetching = (): ImagesFetchingAction => ({
+  type: ImageActionTypes.Fetching,
+});
 
-export const fetching = () => ({ type: FETCHING });
-export const success = (response: any) => ({
-  type: SUCCESS,
+export const success = (response: any): ImagesSuccessAction => ({
+  type: ImageActionTypes.Success,
   payload: response,
 });
-export const error = (response: any) => ({ type: ERROR, payload: response });
+
+export const error = (response: any): ImagesErrorAction => ({
+  type: ImageActionTypes.Error,
+  error: response,
+});
 
 export const defaultState: ImagesState = {
   status: null,
@@ -19,18 +29,20 @@ export const defaultState: ImagesState = {
   maxPages: 1,
 };
 
-const imagesReducer = (state = defaultState, action: ImagesAction) => {
-  const { type, payload = [] } = action;
+const imagesReducer = (state: ImagesState, action: ImagesAction) => {
+  switch (action.type) {
+    case ImageActionTypes.Fetching: {
+      return { ...state, status: action.type };
+    }
+    case ImageActionTypes.Success: {
+      const { payload } = action;
 
-  switch (type) {
-    case FETCHING: {
-      return { ...state, status: type };
+      return { ...state, status: action.type, images: payload };
     }
-    case SUCCESS: {
-      return { ...state, status: type, images: payload };
-    }
-    case ERROR: {
-      return { ...state, status: type, error: payload };
+    case ImageActionTypes.Error: {
+      const { error } = action;
+
+      return { ...state, status: action.type, error };
     }
     default:
       return state;
